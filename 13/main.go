@@ -4,8 +4,7 @@ import "fmt"
 
 func swap(a, b *int) {
 	*a = *a + *b
-	*b = *b - *a
-	*b = -*b
+	*b = *a - *b
 	*a = *a - *b
 }
 
