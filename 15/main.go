@@ -1,14 +1,24 @@
+/*
+Проблема кода - Утечка памяти
+v - строка (в GO - указатель на массив байтов), которую создает createHugeString
+
+justString не копирует первые 100 символов, а указывает на первые 100 символов v
+
+Когда функция someFunc завершается, по идее, она должна очистить v, но она это не делает, т.к. justString все еще держит
+ссылку на часть исходного массива из 1000 байтов, поэтому в памяти приходится его хранить.
+
+Решение: создать новый байтовый слайс на 100 элементов и скопировать в него данные из v, а затем привести к string
+*/
 package main
 
-// var justString string
-//
-// func someFunc() {
-// 	v := createHugeString(1 << 10)
-// 	justString = v[:100]
-// }
-//
-// func main() {
-// 	someFunc()
-// }
-//
-// Проблема кода -
+var justString string
+
+func someFunc() {
+	v := createHugeString(1 << 10)
+	// justString = v[:100]
+	justString = string([]byte(v[:100]))
+}
+
+func main() {
+	someFunc()
+}
