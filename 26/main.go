@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"os"
 	"strings"
+
+	"golang.org/x/text/unicode/norm"
 )
 
 func isUniqueString(input string) bool {
@@ -26,6 +28,8 @@ func main() {
 
 	if scanner.Scan() {
 		input := scanner.Text()
+		input = norm.NFC.String(input)
+
 		fmt.Println(isUniqueString(input))
 	}
 }

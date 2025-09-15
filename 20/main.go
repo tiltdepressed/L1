@@ -4,6 +4,8 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+
+	"golang.org/x/text/unicode/norm"
 )
 
 func reverseRunes(r []rune, start, end int) {
@@ -18,6 +20,7 @@ func main() {
 	scanner := bufio.NewScanner(os.Stdin)
 	if scanner.Scan() {
 		sentence := scanner.Text()
+		sentence = norm.NFC.String(sentence)
 		r := []rune(sentence)
 		reverseRunes(r, 0, len(r)-1)
 
