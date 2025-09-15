@@ -16,6 +16,7 @@ func main() {
 	}
 
 	copy(a[n:], a[n+1:])
+	a[len(a)-1] = 0
 	a = a[:len(a)-1]
 	fmt.Println("Модифицированный массив:", a)
 }
